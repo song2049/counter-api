@@ -22,3 +22,29 @@ counter-api
 - 간단하게, counter +, - 기능을 백에서 구현할거
 
 이후 배포
+
+EC2에서 node 설치
+
+node -v
+npm v
+curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+sudo pat install nginx
+sudo apt update
+sudo systemctl start nginx
+sudo systemctl status nginx
+sudo apt-get install -y nodejs
+
+cd ~
+git clone https://github.com/song2049/counter-api.git
+cd counter-api/ 
+npm install 
+sudo vi /etc/nginx/sites-available/default
+
+백엔드 설정
+    proxy_pass http://127.0.0.1:3001;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+    sudo systemctl reload nginx
+ubuntu@ip-172-31-26-244:~/counter-api$ npm run start
